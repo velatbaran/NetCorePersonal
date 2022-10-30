@@ -1,0 +1,40 @@
+﻿@model CreateCategoryDto
+@{
+    ViewData["Title"] = "Create Category";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="All" class="text-danger small"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" placeholder="title" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea rows="6" cols="5" asp-for="Description" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group mb-3">
+                <button type="submit" class="btn btn-success" title="Save"><i class="fa-solid fa-save me-2"></i>Save</button>
+                <a asp-action="Index" class="btn btn-secondary" title="Back to List"><i class="fa-solid fa-angles-left me-2"></i>Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @Html.Partial("_ValidationScriptsPartial")
+}

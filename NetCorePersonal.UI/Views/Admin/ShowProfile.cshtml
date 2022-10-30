@@ -1,0 +1,164 @@
+﻿@{
+    ViewData["Title"] = "Show Profile";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="display-4 border-bottom text-center pb-2">@ViewData["Title"]</h1>
+    </div>
+    <div class="col-md-6"></div>
+<div class="col-md-6">
+     <h1 class="display-4 border-bottom text-center pb-2">Settings</h1>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-4 offset-4 my-3">
+        <div class="mb-4">
+            <div asp-validation-summary="All" class="text-danger small"></div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <form method="post" asp-action="ChangeProfileImage" enctype="multipart/form-data">
+            <div class="text-center mb-3">
+                <img src="~/uploads/User/@ViewData["ProfileImage"]" width="256" class="img-thumbnail rounded-circle" />
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label small">Profile Image&nbsp;<span class="badge bg-danger ms-2">required</label>
+                <input type="file" name="file" class="form-control" accept=".jpg,.jpeg,.png" />
+                <div class="text-secondary">
+                    <span class="small">
+                        <i class="fa fa-info-circle me-2"></i>Only .jpg,.jpeg,.png files
+                    </span>
+                </div>
+                <div class="text-right mt-3">
+                    <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Save</button>
+                </div>
+                @if (ViewData["result"] != null && ViewData["result"] == "Profile image updated successfully")
+                {
+                    <span class="text-success small">@ViewData["result"]</span>
+                }
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <form method="post" asp-action="ChangeFullName">
+            <div class="form-group">
+                <label class="form-label small">Name Surname<span class="badge bg-danger ms-2">required</span></label>
+                <div class="input-group mb-3">
+                    <input name="fullname" type="text" class="form-control" placeholder="John Doe" value="@ViewData["FullName"]" />
+                    <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Save</button>
+                </div>
+                @if (ViewData["result"] != null && ViewData["result"] == "FullName updated successfully")
+                {
+                    <span class="text-success small">@ViewData["result"].</span>
+                }
+            </div>
+        </form>
+        <hr />
+        <form method="post" asp-action="ChangeUsername">
+            <div class="form-group">
+                <label class="form-label small">Username<span class="badge bg-danger ms-2">required</span></label>
+                <div class="input-group mb-3">
+                    <input name="username" type="text" class="form-control" placeholder="johndoe" value="@ViewData["Username"]" />
+                    <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Save</button>
+                </div>
+                @if (ViewData["result"] != null && ViewData["result"] == "Username updated successfully")
+                {
+                    <span class="text-success small">@ViewData["result"].</span>
+                }
+            </div>
+        </form>
+        <hr />
+        <form method="post" asp-action="ChangeEmail">
+            <div class="form-group">
+                <label class="form-label small">Email<span class="badge bg-danger ms-2">required</span></label>
+                <div class="input-group mb-3">
+                    <input name="email" type="email" class="form-control" placeholder="test@test.com" value="@ViewData["Email"]" />
+                    <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Save</button>
+                </div>
+                @if (ViewData["result"] != null && ViewData["result"] == "Email updated successfully")
+                {
+                    <span class="text-success small">@ViewData["result"].</span>
+                }
+            </div>
+        </form>
+        <hr />
+        <form method="post" asp-action="ChangPhone">
+            <div class="form-group">
+                <label class="form-label small">Phone<span class="badge bg-danger ms-2">required</span></label>
+                <div class="input-group mb-3">
+                    <input name="phone" type="number" class="form-control" placeholder="444-444-44" value="@ViewData["Phone"]" />
+                    <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Save</button>
+                </div>
+                @if (ViewData["result"] != null && ViewData["result"] == "Phone updated successfully")
+                {
+                    <span class="text-success small">@ViewData["result"].</span>
+                }
+            </div>
+        </form>
+        <hr />
+        <form method="post" asp-action="ChangeWebSite">
+            <div class="form-group">
+                <label class="form-label small">WebSite<span class="badge bg-danger ms-2">required</span></label>
+                <div class="input-group mb-3">
+                    <input name="website" type="text" class="form-control" placeholder="xyz.com" value="@ViewData["WebSite"]" />
+                    <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Save</button>
+                </div>
+                @if (ViewData["result"] != null && ViewData["result"] == "WebSite updated successfully")
+                {
+                    <span class="text-success small">@ViewData["result"].</span>
+                }
+            </div>
+        </form>
+        <hr />
+        <form method="post" asp-action="ChangeAbout">
+            <div class="form-group">
+                <label class="form-label small">About<span class="badge bg-danger ms-2">required</span></label>
+                <div class="input-group mb-3">
+                    <textarea name="about" type="text" rows="12" cols="5" class="form-control">@ViewData["About"]</textarea>
+                </div>
+                <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Save</button>
+                @if (ViewData["result"] != null && ViewData["result"] == "About updated successfully")
+                {
+                    <span class="text-success small">@ViewData["result"].</span>
+                }
+            </div>
+        </form>
+        <hr />
+        <form method="post" asp-action="ChangePassword">
+            <div class="form-group">
+                <label class="form-label small">Password<span class="badge bg-danger ms-2">required</span></label>
+                <div class="input-group mb-3">
+                    <input name="password" type="password" class="form-control" placeholder="xyz123ABC?./" />
+                    <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Save</button>
+                </div>
+                @if (ViewData["result"] != null && ViewData["result"] == "Password updated successfully")
+                {
+                    <span class="text-success small">@ViewData["result"].</span>
+                }
+            </div>
+        </form>
+        <hr />
+        <div class="form-group mt-3">
+            <label class="form-label small">API Token<span class="badge bg-danger ms-2">required</span></label>
+            <textarea id="token" class="form-control" rows="5" readonly>@ViewContext.HttpContext.Request.Cookies[".NetCore6Personal.auth"]
+</textarea>
+            <p class="small cursor mt-1">Note : Use Authentication <span class="badge bg-secondary ms-3 cursor-pointer" onclick="copyTo()">Copy to clipboard</span></p>
+            <p class="alert alert-info small"><span class="fa fa-circle-info me-2"></span> Headers &gt; Cookie &gt; .NetCore6Personal.auth = [token]</p>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        function copyTo(){
+            var txt = document.getElementById("token");
+            txt.select();
+            navigator.clipboard.writeText(txt.value);
+            txt.setSelectionRange(0,0);
+
+            toastr.success("Copied to token", "Copy");
+        }
+    </script>
+}

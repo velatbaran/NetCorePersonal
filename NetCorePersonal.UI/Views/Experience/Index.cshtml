@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ExperienceDto>
+@{
+    ViewData["Title"] = "Experiences";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <a asp-action="Create" class="btn btn-primary btn-sm" title="New Experience"><i class="fa fa-plus me-2"></i>New Experience</a>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-md-12">
+        @if (Model.Count() == 0)
+        {
+            <div class="alert alert-danger mt-2"><i class="fa-solid fa-ban me-3"></i>No data</div>
+        }
+        else
+        {
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>IsActived</th>
+                        <th>Description</th>
+                        <th>StartDate</th>
+                        <th>EndDate</th>
+                        <th>Created At</th>
+                        <th>Modified At</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ExperienceDto exp in Model)
+                    {
+                        <tr>
+                            <td>@exp.Name</td>
+                            <td>@exp.Location</td>
+                            <td class="text-center">
+                                @if (@exp.IsActived)
+                                {
+                                    <i class="fa fa-check text-success"></i>
+                                }else
+                                {
+                                    <i class="fa fa-times text-danger"></i>
+                                }
+                                </td>
+                            <td>@exp.Description</td>
+                            <td>@exp.StartDate</td>
+                            <td>@exp.EndDate</td>
+                            <td>@exp.CreatedDate</td>
+                            <td>@exp.ModifiedDate</td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-id="@exp.Id" class="btn btn-warning btn-sm text-white" title="Edit"><i class="fa fa-edit me-2"></i>Edit</a>
+                                <a asp-action="Delete" asp-route-id="@exp.Id"
+                           onclick="return confirm('Are you sure want to delete this experience : @exp.Name ?')" asp-route-id="@exp.Id"
+                           class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash me-2"></i>Remove</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>
+@section Scripts{
+    @if (TempData["result"] != null)
+    {
+        <script>
+            toastr["success"]('@TempData["result"]', "Success");
+        </script>
+    }
+}

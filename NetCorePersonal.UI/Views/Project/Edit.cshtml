@@ -1,0 +1,74 @@
+﻿@model EditProjectDto
+@{
+    ViewData["Title"] = "Edit Project";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="All" class="text-danger small"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" placeholder="Name" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CategoryId"></label>
+                <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control">
+                    <option value="0" selected>Choose</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Client" class="form-label"></label>
+                <input asp-for="Client" class="form-control" placeholder="Client" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="UsedTeknologies" class="form-label"></label>
+                <input asp-for="UsedTeknologies" class="form-control" placeholder="UsedTeknologies" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="ProjectUrl" class="form-label"></label>
+                <input asp-for="ProjectUrl" class="form-control" placeholder="Project Url" />
+            </div>
+
+            <div class="text-center mb-3">
+                <img src="~/uploads/Projects/@Model.Image" width="128" class="img-thumbnail" />
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Image" class="form-label"></label>
+                <input type="file" asp-for="Image" class="form-control" />
+                <span class="small">
+                    <i class="fa fa-info-circle me-2"></i>Only .jpg,.jpeg,.png files
+                </span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea rows="6" cols="5" asp-for="Description" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group mb-3">
+                <button type="submit" class="btn btn-warning" title="Edit"><i class="fa-solid fa-edit me-2"></i>Edit</button>
+                <a asp-action="Index" class="btn btn-secondary" title="Back to List"><i class="fa-solid fa-angles-left me-2"></i>Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @Html.Partial("_ValidationScriptsPartial")
+}
+

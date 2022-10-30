@@ -1,0 +1,72 @@
+﻿@model List<ProjectsWithCategoryDto>
+@{
+    ViewData["Title"] = "Projects";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <a asp-action="Create" class="btn btn-primary btn-sm" title="New Project"><i class="fa fa-plus me-2"></i>New Project</a>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-md-12">
+        @if (Model.Count() == 0)
+        {
+            <span class="alert alert-danger">No data</span>
+        }
+        else
+        {
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Client</th>
+                        <th>Image</th>
+                        <th>Created At</th>
+                        <th>Modified At</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ProjectsWithCategoryDto project in Model)
+                    {
+                        <tr>
+                            <td>@project.Name</td>
+                            <td>@project.Category.Title</td>
+                            <td>@project.Client</td>
+                            <td>
+                                <img src="uploads/Projects/@project.Image" alt="@project.Name" width="64" />
+                            </td>
+                            <td>@project.CreatedDate</td>
+                            <td>@project.ModifiedDate</td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-id="@project.Id" class="btn btn-warning btn-sm text-white" title="Edit"><i class="fa fa-edit me-2"></i>Edit</a>
+                                <a asp-action="Delete" asp-route-id="@project.Id"
+                           onclick="return confirm('Are you sure want to delete this project : @project.Name ?')" asp-route-id="@project.Id"
+                           class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash me-2"></i>Remove</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>
+@section Scripts{
+    @if (TempData["result"] != null)
+    {
+        <script>
+            toastr["success"]('@TempData["result"]', "Success");
+        </script>
+    }
+}

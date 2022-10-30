@@ -1,0 +1,70 @@
+﻿@model EditContactDto
+@{
+    ViewData["Title"] = "Edit Contact";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <form asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="All" class="text-danger small"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Location" class="form-label"></label>
+                <input asp-for="Location" class="form-control" placeholder="Location" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input type="email" asp-for="Email" class="form-control" placeholder="Email" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Phone" class="form-label"></label>
+                <input type="number" asp-for="Phone" class="form-control" placeholder="Phone" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Instagram" class="form-label"></label>
+                <input asp-for="Instagram" class="form-control" placeholder="Instagram" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Twitter" class="form-label"></label>
+                <input asp-for="Twitter" class="form-control" placeholder="Twitter" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Linkedin" class="form-label"></label>
+                <input asp-for="Linkedin" class="form-control" placeholder="Linkedin" />
+            </div>
+
+
+            <div class="form-group mb-3">
+                <label asp-for="Telegram" class="form-label"></label>
+                <input asp-for="Telegram" class="form-control" placeholder="Telegram" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="IFrame" class="form-label"></label>
+                <input asp-for="IFrame" class="form-control" placeholder="IFrame" />
+            </div>
+
+            <div class="form-group mb-3" style="float:right">
+                <button type="submit" class="btn btn-warning btn-lg start-end" title="Edit"><i class="fa-solid fa-edit me-2"></i>Edit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @Html.Partial("_ValidationScriptsPartial")
+}
