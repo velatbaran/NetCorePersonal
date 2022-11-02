@@ -1,0 +1,29 @@
+﻿@{
+    IEnumerable<Project> projects = ViewBag.Projects;
+}
+<section id="portfolio" class="portfolio section-bg">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Projects</h2>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
+
+            @foreach (var item in projects)
+            {
+                <div class="col-lg-4 col-md-6 portfolio-item">
+                    <div class="portfolio-wrap">
+                        <img src="uploads/Projects/@item.Image" class="img-fluid" alt="">
+                        <div class="portfolio-links">
+                            <a href="uploads/Projects/@item.Image" data-gallery="portfolioGallery" class="portfolio-lightbox" title="@item.Name"><i class="bx bx-plus"></i></a>
+                            <a href="Home/ProjectDetails" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+</section>

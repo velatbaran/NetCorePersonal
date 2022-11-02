@@ -16,11 +16,13 @@ namespace NetCorePersonal.UI.Controllers
     {
         private readonly IService<User> _service;
         private readonly IHasher _hasher;
+        private readonly IConfiguration _configuration;
 
-        public AccountController(IService<User> service, IHasher hasher)
+        public AccountController(IService<User> service, IHasher hasher, IConfiguration configuration)
         {
             _service = service;
             _hasher = hasher;
+            _configuration = configuration;
         }
 
         public IActionResult Login()
@@ -86,8 +88,14 @@ namespace NetCorePersonal.UI.Controllers
                     return View(_forgotPasswordDto);
                 }
 
+                // Email Values
+                int _port = Convert.ToInt32(_configuration.GetValue<string>("EmailSettings:Port"));
+                string _email = _configuration.GetValue<string>("EmailSettings:Email");
+                string _password = _configuration.GetValue<string>("EmailSettings:Password");
+                string _smtpClient = _configuration.GetValue<string>("EmailSettings:SmtpClient");
+
                 MimeMessage mimeMessage = new MimeMessage();
-                MailboxAddress mailboxAddressFrom = new MailboxAddress("Welat BARAN - ADMIN", "baranvelat021@gmail.com");
+                MailboxAddress mailboxAddressFrom = new MailboxAddress("Welat BARAN - ADMIN", _email);
                 mimeMessage.From.Add(mailboxAddressFrom);
                 MailboxAddress mailboxAddressTo = new MailboxAddress("User", _forgotPasswordDto.Email);
                 mimeMessage.To.Add(mailboxAddressTo);
@@ -105,14 +113,13 @@ namespace NetCorePersonal.UI.Controllers
                 mimeMessage.Subject = "Welat BARAN Website - New Password";
 
                 SmtpClient client = new SmtpClient();
-                client.Connect("smtp.gmail.com", 587, false);
-                client.Authenticate("baranvelat021@gmail.com", "viavjonpxnlmojjw");
+                client.Connect(_smtpClient, _port, false);
+                client.Authenticate(_email, _password);
                 client.Send(mimeMessage);
                 client.Disconnect(true);
-                TempData["result"] = "New password sended successfully";
+                TempData["result"] = "New password sent successfully";
                 return RedirectToAction(nameof(Login));
             }
-
             return View();
         }
     }

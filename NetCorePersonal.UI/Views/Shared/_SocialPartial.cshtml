@@ -1,0 +1,11 @@
+﻿@*@model SocialViewModel*@
+<div class="profile">
+    <img src="~/uploads/User/@ViewData["SocialProfileImage"]" alt="" class="img-fluid rounded-circle">
+    <h1 class="text-light"><a href="Home/Index">@ViewBag.FullName</a></h1>
+    <div class="social-links mt-3 text-center">
+        <a href="@ViewData["SocialTwitter"]" target="_blank" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        <a href="@ViewData["SocialTelegram"]" target="_blank" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a href="@ViewData["SocialInstagram"]" target="_blank" title="Github"><i class="fa-brands fa-github"></i></a>
+        <a href="@ViewData["SocialLinkedin"]" target="_blank" title="Linkedin"><i class="fa-brands fa-linkedin"></i></a>
+    </div>
+</div>

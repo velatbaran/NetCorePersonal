@@ -1,0 +1,71 @@
+﻿@model ContactViewModel
+<section id="contact" class="contact">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Contact</h2>
+        </div>
+
+        <div class="row" data-aos="fade-in">
+
+            <div class="col-lg-5 d-flex align-items-stretch">
+                <div class="info">
+                    <div class="address">
+                        <i class="bi bi-geo-alt"></i>
+                        <h4>Location:</h4>
+                        <p>@ViewData["ContactLocation"]</p>
+                    </div>
+
+                    <div class="email">
+                        <i class="bi bi-envelope"></i>
+                        <h4>Email:</h4>
+                        <p>@ViewData["ContactEmail"]</p>
+                    </div>
+
+                    <div class="phone">
+                        <i class="bi bi-phone"></i>
+                        <h4>Call:</h4>
+                        <p>@ViewData["ContactPhone"]</p>
+                    </div>
+                    <iframe src="@ViewData["ContactIFrame"]" width="330" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+                <form asp-action="SendMessage" method="post" role="form" class="php-email-form">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Name"></label>
+                            <input type="text" asp-for="Name" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Email"></label>
+                            <input type="email" class="form-control" asp-for="Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Subject"></label>
+                        <input type="text" class="form-control" asp-for="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Message"></label>
+                        <textarea class="form-control" asp-for="Message" rows="10" required></textarea>
+                    </div>
+                    <div class="my-3">
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">Your message has been sent. Thank you!</div>
+                    </div>
+                    <div class="text-center"><button type="submit">Send Message</button></div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+@if (TempData["resultMessage"] != null)
+{
+    <script>
+        toastr["success"]("@TempData["resultMessage"]", "Success");
+    </script>
+}

@@ -31,7 +31,8 @@ namespace NetCorePersonal.UI.Controllers
             {
                 throw new NotFoundException("Contact not found");
             }
-            return View(_mapper.Map<EditContactDto>(_contact));
+            EditContactDto _editContactDto = _mapper.Map<EditContactDto>(_contact);
+            return View(_editContactDto);
         }
 
         [HttpPost]
